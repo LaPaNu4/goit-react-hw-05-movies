@@ -1,6 +1,6 @@
 
 import { NavLink, Routes , Route } from "react-router-dom";
-
+import Home from "pages/Home";
 
 export const App = () => {
   return (
@@ -13,8 +13,9 @@ export const App = () => {
       </header>
       <main>
         <Routes>
-          <Route path="/" element={<>Home</>} />
+          <Route path="/" element={<Home />} />
           <Route path="/Movies" element={<>Movies</>} />
+          <Route path="*" element={<>NotFound</>} />
         </Routes>
       </main>
     </>
