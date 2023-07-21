@@ -4,6 +4,7 @@ import { GetMovie } from 'Api/Api';
 import { Info } from './MovieDetails.styled';
 import { NavLink, Routes, Route } from 'react-router-dom';
 import CastDetails from './Cast';
+import ReviewDetails from './Reviews';
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState([]);
@@ -67,7 +68,7 @@ const MovieDetails = () => {
       </div>
       <Routes>
         <Route path="Cast" element={<CastDetails/>} />
-        <Route path="Reviews" element={<div>Reviews</div>} />
+        <Route path="Reviews" element={<ReviewDetails/>} />
       </Routes>
     </>
   );

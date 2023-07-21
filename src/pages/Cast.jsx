@@ -9,7 +9,7 @@ const CastDetails = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const {cast} = await GetCast(params.movieId);
+        const { cast } = await GetCast(params.movieId);
         if (cast) {
           setCasts(cast);
           console.log(cast);
@@ -29,13 +29,30 @@ const CastDetails = () => {
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-    //               casts.map(cast => {
-    //                   <div>
-    //            `https://image.tmdb.org/t/p/original${img}`
-    //        </div>
-    //    })
-          <div>cast</div>
-        
+        <div>
+          {casts.map(cast => {
+              return (
+                <div key={cast.id} >
+                  {cast.profile_path ? (
+                    <img
+                      src={`https://image.tmdb.org/t/p/original${cast.profile_path}`}
+                      alt={`${cast.original_name}`}
+                      width={'100px'}
+                    />
+                  ) : (
+                    <img
+                      src="https://www.tgv.com.my/assets/images/404/movie-poster.jpg"
+                      alt=""
+                      width={'100px'}
+                    />
+                  )}
+                  <p>{cast.original_name}</p>
+                  <p>{cast.character}</p>
+                </div>
+              );
+          })}
+        </div>
+        //   <div>cast</div>
       )}
     </>
   );
