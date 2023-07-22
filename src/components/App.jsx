@@ -1,7 +1,12 @@
 
 import { NavLink, Routes , Route } from "react-router-dom";
-import Home from "pages/Home";
-import MovieDetails from "pages/MovieDetails";
+import { Suspense, lazy } from "react";
+// import Home from "pages/Home";
+// import MovieDetails from "pages/MovieDetails";
+// import Movies from "pages/Movies";
+const Home = lazy(() => import('pages/Home'));
+const MovieDetails = lazy(() => import('pages/MovieDetails'));
+const Movies = lazy(() => import('pages/Movies'));
 
 export const App = () => {
   return (
@@ -13,12 +18,14 @@ export const App = () => {
         </nav>
       </header>
       <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Movies" element={<>Movies</>} />
-          <Route path="/Movies/:movieId/*" element={<MovieDetails />} />
-          <Route path="*" element={<>NotFound</>} />
-        </Routes>
+        <Suspense fallback={<p>Loading...</p>}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/Movies" element={<Movies />} />
+            <Route path="/Movies/:movieId/*" element={<MovieDetails />} />
+            <Route path="*" element={<>NotFound</>} />
+          </Routes>
+        </Suspense>
       </main>
     </>
   );

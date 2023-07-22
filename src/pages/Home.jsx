@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { GetDayMovies } from 'Api/Api';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import MovieList from './Home.styled';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const location = useLocation();
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -13,7 +14,7 @@ const Home = () => {
         const data = await GetDayMovies();
         if (data) {
           setMovies(data.results);
-          console.log(data.results);
+          // console.log(data.results);
           setIsLoading(false);
         }
       } catch (error) {
@@ -32,7 +33,11 @@ const Home = () => {
       ) : (
         <MovieList>
           {movies.map(movie => (
-            <Link key={movie.id} to={`/Movies/${movie.id}`}>
+            <Link
+              state={{ from: location }}
+              key={movie.id}
+              to={`/Movies/${movie.id}`}
+            >
               {movie.title}
             </Link>
           ))}

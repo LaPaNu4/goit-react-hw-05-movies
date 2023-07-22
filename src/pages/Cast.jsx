@@ -12,7 +12,7 @@ const CastDetails = () => {
         const { cast } = await GetCast(params.movieId);
         if (cast) {
           setCasts(cast);
-          console.log(cast);
+          // console.log(cast);
           setIsLoading(false);
         }
       } catch (error) {
